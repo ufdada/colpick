@@ -247,10 +247,8 @@ colpick Color Picker / colpick.com
 .colpick .colpick_submit {
 	position: absolute;
 	left: 207px;
-	top: 149px;
+	top: 147px;
 	width: 130px;
-	height: 22px;
-	line-height: 22px;
 	background: #efefef;
 	text-align: center;
 	color: #555;
