@@ -258,6 +258,7 @@ For more examples see [Usage examples](example/index.html).
 * Overflowing OK Button
 * Updated example
 * Added the missing example images back again
+* Bugfix for Edge showing 2 dialogs (native dialog and colpick)
 
 Dual licensed under the MIT and GPLv2 licenses.
 
