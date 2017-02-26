@@ -328,6 +328,13 @@
                 }
                 return hex;
             },
+            getUniqueID = (function () {
+                var cnt = 0;
+                return function () {
+                    cnt += 1;
+                    return cnt;
+                };
+            })(),
             restoreOriginal = function () {
                 var cal = $(this).parent();
                 var col = cal.data('colpick').origColor;
@@ -374,7 +381,7 @@
                         }
 
                         //Generate and assign a random ID
-                        var id = 'collorpicker_' + parseInt(Math.random() * 1000);
+                        var id = 'colorpicker_' + getUniqueID();
                         $(this).data('colpickId', id);
                         //Set the tpl's ID and get the HTML
                         var cal = $(tpl).attr('id', id);
@@ -459,34 +466,36 @@
             },
             //Sets a color as new and current (default)
             setColor: function (col, setCurrent) {
-                setCurrent = (typeof setCurrent === "undefined") ? 1 : setCurrent;
-                if (typeof col == 'string') {
-                    col = hexToHsb(col);
-                } else if (col.r != undefined && col.g != undefined && col.b != undefined) {
-                    col = rgbToHsb(col);
-                } else if (col.h != undefined && col.s != undefined && col.b != undefined) {
-                    col = fixHSB(col);
-                } else {
-                    return this;
-                }
-                return this.each(function () {
-                    if ($(this).data('colpickId')) {
-                        var cal = $('#' + $(this).data('colpickId'));
-                        cal.data('colpick').color = col;
-                        cal.data('colpick').origColor = col;
-                        fillRGBFields(col, cal.get(0));
-                        fillHSBFields(col, cal.get(0));
-                        fillHexFields(col, cal.get(0));
-                        setHue(col, cal.get(0));
-                        setSelector(col, cal.get(0));
-
-                        setNewColor(col, cal.get(0));
-                        cal.data('colpick').onChange.apply(cal.parent(), [col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, 1]);
-                        if (setCurrent) {
-                            setCurrentColor(col, cal.get(0));
-                        }
+                if (col != undefined) {
+                    setCurrent = (typeof setCurrent === "undefined") ? 1 : setCurrent;
+                    if (typeof col == 'string') {
+                        col = hexToHsb(col);
+                    } else if (col.r != undefined && col.g != undefined && col.b != undefined) {
+                        col = rgbToHsb(col);
+                    } else if (col.h != undefined && col.s != undefined && col.b != undefined) {
+                        col = fixHSB(col);
+                    } else {
+                        return this;
                     }
-                });
+                    return this.each(function () {
+                        if ($(this).data('colpickId')) {
+                            var cal = $('#' + $(this).data('colpickId'));
+                            cal.data('colpick').color = col;
+                            cal.data('colpick').origColor = col;
+                            fillRGBFields(col, cal.get(0));
+                            fillHSBFields(col, cal.get(0));
+                            fillHexFields(col, cal.get(0));
+                            setHue(col, cal.get(0));
+                            setSelector(col, cal.get(0));
+
+                            setNewColor(col, cal.get(0));
+                            cal.data('colpick').onChange.apply(cal.parent(), [col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, 1]);
+                            if (setCurrent) {
+                                setCurrentColor(col, cal.get(0));
+                            }
+                        }
+                    });
+                }
             },
             destroy: function () {
                 $('#' + $(this).data('colpickId')).remove();
