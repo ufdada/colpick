@@ -42,6 +42,7 @@
                 submitText: 'OK',
                 height: 156,
                 polyfill: false,
+                zIndex: 1,
                 styles: false
             },
             //Fill the inputs of the plugin
@@ -435,6 +436,7 @@
                         if (options.flat) {
                             cal.appendTo(options.appendTo || this).show();
                             cal.css(options.styles || {
+                                zIndex: options.zIndex,
                                 position: 'relative',
                                 display: 'block'
                             });
@@ -442,6 +444,7 @@
                             cal.appendTo(options.appendTo || document.body);
                             $(this).on(options.showEvent, show);
                             cal.css(options.styles || {
+                                zIndex: options.zIndex,
                                 position: 'absolute'
                             });
                         }

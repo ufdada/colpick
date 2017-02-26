@@ -102,8 +102,12 @@ For more examples see [Usage examples](example/index.html).
       </td>
     </tr>
     <tr>
-      <td>style</td><td>object</td>
+      <td>styles</td><td>object</td>
       <td>Set additional styles to the picker. Will accept any object that could be passed to <a href="http://api.jquery.com/css/#css-properties">jQuery's .css method</a>. Default: null</td>
+    </tr>
+	<tr>
+      <td>zIndex</td><td>number</td>
+      <td>Sets the z-Index of the color picker. Convinient if it gets hidden by another object. Note: Isn't applied when option styles is set!</td>
     </tr>
     <tr>
       <td>onBeforeShow</td><td>function</td>
