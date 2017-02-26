@@ -377,11 +377,13 @@
                         if (typeof opt.polyfill == 'function') {
                             options.polyfill = opt.polyfill(this);
                         }
-                        if (options.polyfill && $(this).is('input') && this.type === "color") {
+
+                        //Edge always shows it's html5 dialog, so showing colpick doesn't make sense in this case
+                        if ((options.polyfill || /Edge\//g.test(navigator.appVersion)) && $(this).is('input') && this.type === "color") {
                             return;
                         }
 
-                        //Generate and assign a random ID
+                        //Generate and assign a unique ID
                         var id = 'colorpicker_' + getUniqueID();
                         $(this).data('colpickId', id);
                         //Set the tpl's ID and get the HTML
