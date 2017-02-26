@@ -45,7 +45,7 @@ $('#colorpicker').colpick();
 For more examples see [Usage examples](example/index.html).
 
 
-##Options##
+## Options
 <table>
   <thead>
     <tr>
@@ -141,7 +141,7 @@ For more examples see [Usage examples](example/index.html).
 </table>
 
 
-##jQuery.fn Functions##
+## jQuery.fn Functions
 <table>
   <thead>
     <tr>
@@ -175,7 +175,7 @@ For more examples see [Usage examples](example/index.html).
 </table>
     
     
-##jQuery Functions##
+## jQuery Functions
 <table>
   <thead>
     <tr>
@@ -212,7 +212,7 @@ For more examples see [Usage examples](example/index.html).
 </table>
 	
   
-##Layouts##
+## Layouts
 <table>
   <thead>
     <tr>
@@ -223,21 +223,21 @@ For more examples see [Usage examples](example/index.html).
   <tbody>
       <tr>
         <td>full:</td>
-        <td><img src="http://colpick.com/images/colpick_full.jpg" alt="colpick full layout"/></td>
+        <td><img src="./example/images/colpick_full.jpg" alt="colpick full layout"/></td>
       </tr>
       <tr>
         <td>rgbhex:</td>
-        <td><img src="http://colpick.com/images/colpick_rgbhex.jpg" alt="colpick rgbhex layout"/></td>
+        <td><img src="./example/images/colpick_rgbhex.jpg" alt="colpick rgbhex layout"/></td>
       </tr>
       <tr>
         <td>hex:</td>
-        <td><img src="http://colpick.com/images/colpick_hex.jpg" alt="colpick hex layout"/></td>
+        <td><img src="./example/images/colpick_hex.jpg" alt="colpick hex layout"/></td>
       </tr>
   </tbody>
 </table>
 
 
-##Changes to josedvq's version##
+## Changes to josedvq's version
 * **Polyfill:** New option 'polyfill' to work with native color input fields ([PR #36](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/36))
 * **Auto color:** Get the default color from an element's 'value' attribute using jQuery function .val()
 * **Custom parent:**  New option 'appendTo' to specify which element to append the picker to ([PR #44](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/44))
@@ -248,9 +248,16 @@ For more examples see [Usage examples](example/index.html).
   * box-sizing css missing in css file ([PR #16](https://github.com/josedvq/colpick-jQuery-Color-Picker/issues/16))
   * Check if event is null before stopPropagation() ([PR #18](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/18))
   * Prevent duplicate ids ([PR #48](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/48))
-  * colorpicker instead of collorpicker as DOM-ID ([PR #54](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/54))
   * add destroy method to cleanup after colpick plugin ([PR #32](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/32))
   * Call onHide callback when calling colpickHide ([PR #38](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/38))
+
+## Changes to mrgrain's version
+* Prevent duplicate ids was only partial included (unique id generator was missing)
+* colorpicker instead of collorpicker as DOM-ID ([PR #54](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/54))
+* Added zIndex option (so it doesn't get hidden by accident)
+* Overflowing OK Button
+* Updated example
+* Added the missing example images back again
 
 Dual licensed under the MIT and GPLv2 licenses.
 
