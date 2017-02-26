@@ -45,7 +45,7 @@
                 zIndex: 1,
                 styles: false
             },
-            //Fill the inputs of the plugin
+            // Fill the inputs of the plugin
             fillRGBFields = function (hsb, cal) {
                 var rgb = hsbToRgb(hsb);
                 $(cal).data('colpick').fields
@@ -62,7 +62,7 @@
             fillHexFields = function (hsb, cal) {
                 $(cal).data('colpick').fields.eq(0).val(hsbToHex(hsb));
             },
-            //Set the round selector position
+            // Set the round selector position
             setSelector = function (hsb, cal) {
                 $(cal).data('colpick').selector.css('backgroundColor', '#' + hsbToHex({ h: hsb.h, s: 100, b: 100 }));
                 $(cal).data('colpick').selectorIndic.css({
@@ -70,18 +70,18 @@
                     top: parseInt($(cal).data('colpick').height * (100 - hsb.b) / 100, 10)
                 });
             },
-            //Set the hue selector position
+            // Set the hue selector position
             setHue = function (hsb, cal) {
                 $(cal).data('colpick').hue.css('top', parseInt($(cal).data('colpick').height - $(cal).data('colpick').height * hsb.h / 360, 10));
             },
-            //Set current and new colors
+            // Set current and new colors
             setCurrentColor = function (hsb, cal) {
                 $(cal).data('colpick').currentColor.css('backgroundColor', '#' + hsbToHex(hsb));
             },
             setNewColor = function (hsb, cal) {
                 $(cal).data('colpick').newColor.css('backgroundColor', '#' + hsbToHex(hsb));
             },
-            //Called when the new color is changed
+            // Called when the new color is changed
             change = function () {
                 var cal = $(this).parent().parent(), col;
                 if (this.parentNode.className.indexOf('_hex') > 0) {
@@ -110,7 +110,7 @@
                 setNewColor(col, cal.get(0));
                 cal.data('colpick').onChange.apply(cal.parent(), [col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, 0]);
             },
-            //Change style on blur and on focus of inputs
+            // Change style on blur and on focus of inputs
             blur = function () {
                 $(this).parent().removeClass('colpick_focus');
             },
@@ -118,7 +118,7 @@
                 $(this).parent().parent().data('colpick').fields.parent().removeClass('colpick_focus');
                 $(this).parent().addClass('colpick_focus');
             },
-            //Increment/decrement arrows functions
+            // Increment/decrement arrows functions
             downIncrement = function (ev) {
                 ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
                 var field = $(this).parent().find('input').focus();
@@ -147,7 +147,7 @@
                 $(document).off('mousemove', moveIncrement);
                 return false;
             },
-            //Hue slider functions
+            // Hue slider functions
             downHue = function (ev) {
                 ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
                 var current = {
@@ -183,7 +183,7 @@
                 $(document).off('mousemove touchmove', moveHue);
                 return false;
             },
-            //Color selector functions
+            // Color selector functions
             downSelector = function (ev) {
                 ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
                 var current = {
@@ -239,7 +239,7 @@
                 $(document).off('mousemove touchmove', moveSelector);
                 return false;
             },
-            //Submit button
+            // Submit button
             clickSubmit = function () {
                 var cal = $(this).parent();
                 var col = cal.data('colpick').color;
@@ -247,7 +247,7 @@
                 setCurrentColor(col, cal.get(0));
                 cal.data('colpick').onSubmit(col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el);
             },
-            //Show/hide the color picker
+            // Show/hide the color picker
             show = function (ev) {
                 if (ev) {
                     // Prevent the trigger of any direct parent
@@ -270,7 +270,7 @@
                 if (cal.data('colpick').onShow.apply(this, [cal.get(0)]) != false) {
                     cal.show();
                 }
-                //Hide when user clicks outside
+                // Hide when user clicks outside
                 $('html').mousedown({ cal: cal }, hide);
                 cal.mousedown(function (ev) {
                     ev.stopPropagation();
@@ -293,7 +293,7 @@
                     w: window.innerWidth || (m ? document.documentElement.clientWidth : document.body.clientWidth)
                 };
             },
-            //Fix the values if the user enters a negative or high value
+            // Fix the values if the user enters a negative or high value
             fixHSB = function (hsb) {
                 return {
                     h: Math.min(360, Math.max(0, hsb.h)),
@@ -350,7 +350,7 @@
         return {
             init: function (opt) {
                 opt = $.extend({}, defaults, opt || {});
-                //Set color
+                // Set color
                 if (opt.color === 'auto') {
                 } else if (typeof opt.color == 'string') {
                     opt.color = hexToHsb(opt.color);
@@ -362,51 +362,51 @@
                     return this;
                 }
 
-                //For each selected DOM element
+                // For each selected DOM element
                 return this.each(function () {
-                    //If the element does not have an ID
+                    // If the element does not have an ID
                     if (!$(this).data('colpickId')) {
                         var options = $.extend({}, opt);
-                        //Color
+                        // Color
                         if (opt.color === 'auto') {
                             options.color = $(this).val() ? hexToHsb($(this).val()) : { h: 0, s: 0, b: 0 };
                         }
                         options.origColor = options.color;
 
-                        //Polyfill
+                        // Polyfill
                         if (typeof opt.polyfill == 'function') {
                             options.polyfill = opt.polyfill(this);
                         }
 
-                        //Edge always shows it's html5 dialog, so showing colpick doesn't make sense in this case
+                        // Edge always shows it's html5 dialog, so showing colpick doesn't make sense in this case
                         if ((options.polyfill || /Edge\//g.test(navigator.appVersion)) && $(this).is('input') && this.type === "color") {
                             return;
                         }
 
-                        //Generate and assign a unique ID
+                        // Generate and assign a unique ID
                         var id = 'colorpicker_' + getUniqueID();
                         $(this).data('colpickId', id);
-                        //Set the tpl's ID and get the HTML
+                        // Set the tpl's ID and get the HTML
                         var cal = $(tpl).attr('id', id);
-                        //Add class according to layout
+                        // Add class according to layout
                         cal.addClass('colpick_' + options.layout + (options.submit ? '' : ' colpick_' + options.layout + '_ns'));
-                        //Add class if the color scheme is not default
+                        // Add class if the color scheme is not default
                         if (options.colorScheme != 'light') {
                             cal.addClass('colpick_' + options.colorScheme);
                         }
-                        //Setup submit button
+                        // Setup submit button
                         cal.find('div.colpick_submit').html(options.submitText).click(clickSubmit);
-                        //Setup input fields
+                        // Setup input fields
                         options.fields = cal.find('input').change(change).blur(blur).focus(focus);
                         cal.find('div.colpick_field_arrs').mousedown(downIncrement).end().find('div.colpick_current_color').click(restoreOriginal);
-                        //Setup hue selector
+                        // Setup hue selector
                         options.selector = cal.find('div.colpick_color').on('mousedown touchstart', downSelector);
                         options.selectorIndic = options.selector.find('div.colpick_selector_outer');
-                        //Store parts of the plugin
+                        // Store parts of the plugin
                         options.el = this;
                         options.hue = cal.find('div.colpick_hue_arrs');
                         var huebar = options.hue.parent();
-                        //Paint the hue bar
+                        // Paint the hue bar
                         var UA = navigator.userAgent.toLowerCase();
                         var isIE = navigator.appName === 'Microsoft Internet Explorer';
                         var IEver = isIE ? parseFloat(UA.match(/msie ([0-9]*[\.0-9]+)/)[1]) : 0;
@@ -425,7 +425,7 @@
                         cal.find('div.colpick_hue').on('mousedown touchstart', downHue);
                         options.newColor = cal.find('div.colpick_new_color');
                         options.currentColor = cal.find('div.colpick_current_color');
-                        //Store options and fill with default color
+                        // Store options and fill with default color
                         cal.data('colpick', options);
                         fillRGBFields(options.color, cal.get(0));
                         fillHSBFields(options.color, cal.get(0));
@@ -434,7 +434,7 @@
                         setSelector(options.color, cal.get(0));
                         setCurrentColor(options.color, cal.get(0));
                         setNewColor(options.color, cal.get(0));
-                        //Append to body if flat=false, else show in place
+                        // Append to body if flat=false, else show in place
                         if (options.flat) {
                             cal.appendTo(options.appendTo || this).show();
                             cal.css(options.styles || {
@@ -453,7 +453,7 @@
                     }
                 });
             },
-            //Shows the picker
+            // Shows the picker
             showPicker: function () {
                 return this.each(function () {
                     if ($(this).data('colpickId')) {
@@ -461,7 +461,7 @@
                     }
                 });
             },
-            //Hides the picker
+            // Hides the picker
             hidePicker: function () {
                 return this.each(function () {
                     if ($(this).data('colpickId')) {
@@ -469,7 +469,7 @@
                     }
                 });
             },
-            //Sets a color as new and current (default)
+            // Sets a color as new and current (default)
             setColor: function (col, setCurrent) {
                 if (col != undefined) {
                     setCurrent = (typeof setCurrent === "undefined") ? 1 : setCurrent;
@@ -507,7 +507,7 @@
             }
         };
     }();
-    //Color space conversions
+    // Color space conversions
     var hexToRgb = function (hex) {
         hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
         return { r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF) };
