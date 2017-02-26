@@ -44,7 +44,7 @@
                 polyfill: false,
                 styles: false
             },
-        //Fill the inputs of the plugin
+            //Fill the inputs of the plugin
             fillRGBFields = function (hsb, cal) {
                 var rgb = hsbToRgb(hsb);
                 $(cal).data('colpick').fields
@@ -61,26 +61,26 @@
             fillHexFields = function (hsb, cal) {
                 $(cal).data('colpick').fields.eq(0).val(hsbToHex(hsb));
             },
-        //Set the round selector position
+            //Set the round selector position
             setSelector = function (hsb, cal) {
-                $(cal).data('colpick').selector.css('backgroundColor', '#' + hsbToHex({h: hsb.h, s: 100, b: 100}));
+                $(cal).data('colpick').selector.css('backgroundColor', '#' + hsbToHex({ h: hsb.h, s: 100, b: 100 }));
                 $(cal).data('colpick').selectorIndic.css({
                     left: parseInt($(cal).data('colpick').height * hsb.s / 100, 10),
                     top: parseInt($(cal).data('colpick').height * (100 - hsb.b) / 100, 10)
                 });
             },
-        //Set the hue selector position
+            //Set the hue selector position
             setHue = function (hsb, cal) {
                 $(cal).data('colpick').hue.css('top', parseInt($(cal).data('colpick').height - $(cal).data('colpick').height * hsb.h / 360, 10));
             },
-        //Set current and new colors
+            //Set current and new colors
             setCurrentColor = function (hsb, cal) {
                 $(cal).data('colpick').currentColor.css('backgroundColor', '#' + hsbToHex(hsb));
             },
             setNewColor = function (hsb, cal) {
                 $(cal).data('colpick').newColor.css('backgroundColor', '#' + hsbToHex(hsb));
             },
-        //Called when the new color is changed
+            //Called when the new color is changed
             change = function () {
                 var cal = $(this).parent().parent(), col;
                 if (this.parentNode.className.indexOf('_hex') > 0) {
@@ -109,7 +109,7 @@
                 setNewColor(col, cal.get(0));
                 cal.data('colpick').onChange.apply(cal.parent(), [col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, 0]);
             },
-        //Change style on blur and on focus of inputs
+            //Change style on blur and on focus of inputs
             blur = function () {
                 $(this).parent().removeClass('colpick_focus');
             },
@@ -117,7 +117,7 @@
                 $(this).parent().parent().data('colpick').fields.parent().removeClass('colpick_focus');
                 $(this).parent().addClass('colpick_focus');
             },
-        //Increment/decrement arrows functions
+            //Increment/decrement arrows functions
             downIncrement = function (ev) {
                 ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
                 var field = $(this).parent().find('input').focus();
@@ -146,7 +146,7 @@
                 $(document).off('mousemove', moveIncrement);
                 return false;
             },
-        //Hue slider functions
+            //Hue slider functions
             downHue = function (ev) {
                 ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
                 var current = {
@@ -156,7 +156,7 @@
                 $(document).on('mouseup touchend', current, upHue);
                 $(document).on('mousemove touchmove', current, moveHue);
 
-                var pageY = ((ev.type == 'touchstart') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY );
+                var pageY = ((ev.type == 'touchstart') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY);
                 change.apply(
                     current.cal.data('colpick')
                         .fields.eq(4).val(parseInt(360 * (current.cal.data('colpick').height - (pageY - current.y)) / current.cal.data('colpick').height, 10))
@@ -166,7 +166,7 @@
                 return false;
             },
             moveHue = function (ev) {
-                var pageY = ((ev.type == 'touchmove') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY );
+                var pageY = ((ev.type == 'touchmove') ? ev.originalEvent.changedTouches[0].pageY : ev.pageY);
                 change.apply(
                     ev.data.cal.data('colpick')
                         .fields.eq(4).val(parseInt(360 * (ev.data.cal.data('colpick').height - Math.max(0, Math.min(ev.data.cal.data('colpick').height, (pageY - ev.data.y)))) / ev.data.cal.data('colpick').height, 10))
@@ -182,7 +182,7 @@
                 $(document).off('mousemove touchmove', moveHue);
                 return false;
             },
-        //Color selector functions
+            //Color selector functions
             downSelector = function (ev) {
                 ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
                 var current = {
@@ -238,7 +238,7 @@
                 $(document).off('mousemove touchmove', moveSelector);
                 return false;
             },
-        //Submit button
+            //Submit button
             clickSubmit = function () {
                 var cal = $(this).parent();
                 var col = cal.data('colpick').color;
@@ -246,7 +246,7 @@
                 setCurrentColor(col, cal.get(0));
                 cal.data('colpick').onSubmit(col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el);
             },
-        //Show/hide the color picker
+            //Show/hide the color picker
             show = function (ev) {
                 if (ev) {
                     // Prevent the trigger of any direct parent
@@ -265,12 +265,12 @@
                 if (left + calW > viewPort.l + viewPort.w) {
                     left -= calW;
                 }
-                cal.css({left: left + 'px', top: top + 'px'});
+                cal.css({ left: left + 'px', top: top + 'px' });
                 if (cal.data('colpick').onShow.apply(this, [cal.get(0)]) != false) {
                     cal.show();
                 }
                 //Hide when user clicks outside
-                $('html').mousedown({cal: cal}, hide);
+                $('html').mousedown({ cal: cal }, hide);
                 cal.mousedown(function (ev) {
                     ev.stopPropagation();
                 })
@@ -292,7 +292,7 @@
                     w: window.innerWidth || (m ? document.documentElement.clientWidth : document.body.clientWidth)
                 };
             },
-        //Fix the values if the user enters a negative or high value
+            //Fix the values if the user enters a negative or high value
             fixHSB = function (hsb) {
                 return {
                     h: Math.min(360, Math.max(0, hsb.h)),
@@ -368,7 +368,7 @@
                         var options = $.extend({}, opt);
                         //Color
                         if (opt.color === 'auto') {
-                            options.color = $(this).val() ? hexToHsb($(this).val()) : {h: 0, s: 0, b: 0};
+                            options.color = $(this).val() ? hexToHsb($(this).val()) : { h: 0, s: 0, b: 0 };
                         }
                         options.origColor = options.color;
 
@@ -407,7 +407,7 @@
                         var UA = navigator.userAgent.toLowerCase();
                         var isIE = navigator.appName === 'Microsoft Internet Explorer';
                         var IEver = isIE ? parseFloat(UA.match(/msie ([0-9]*[\.0-9]+)/)[1]) : 0;
-                        var ngIE = ( isIE && IEver < 10 );
+                        var ngIE = (isIE && IEver < 10);
                         var stops = ['#ff0000', '#ff0080', '#ff00ff', '#8000ff', '#0000ff', '#0080ff', '#00ffff', '#00ff80', '#00ff00', '#80ff00', '#ffff00', '#ff8000', '#ff0000'];
                         if (ngIE) {
                             var i, div;
@@ -505,13 +505,13 @@
     //Color space conversions
     var hexToRgb = function (hex) {
         hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
-        return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
+        return { r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF) };
     };
     var hexToHsb = function (hex) {
         return rgbToHsb(hexToRgb(hex));
     };
     var rgbToHsb = function (rgb) {
-        var hsb = {h: 0, s: 0, b: 0};
+        var hsb = { h: 0, s: 0, b: 0 };
         var min = Math.min(rgb.r, rgb.g, rgb.b);
         var max = Math.max(rgb.r, rgb.g, rgb.b);
         var delta = max - min;
@@ -576,7 +576,7 @@
                 rgb.b = 0
             }
         }
-        return {r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b)};
+        return { r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) };
     };
     var rgbToHex = function (rgb) {
         var hex = [
