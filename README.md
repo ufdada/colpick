@@ -241,12 +241,12 @@ For more examples see [Usage examples](example/index.html).
 * **UMD compatibility:** Uses an UMD style closure to be loadable with AMD loaders (require.js) or CommonJS ([PR #37](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/37))
 * **3 character hex support:** Added support for entering three character hex codes as specificied in the CSS 2.1 spec ([PR #43](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/43))
 * **Fixed Issues:**
-  * [box-sizing css missing in css file (PR #16)](https://github.com/josedvq/colpick-jQuery-Color-Picker/issues/16)
-  * [Check if event is null before stopPropagation() (PR #18)](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/18)
-  * [Prevent duplicate ids (PR #48)](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/48)
-  * [colorpicker instead of collorpicker as DOM-ID (PR #54)](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/54)
-  * [add destroy method to cleanup after colpick plugin (PR #32)](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/32)
-  * [Call onHide callback when calling colpickHide (PR #38)](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/38)
+  * box-sizing css missing in css file ([PR #16](https://github.com/josedvq/colpick-jQuery-Color-Picker/issues/16))
+  * Check if event is null before stopPropagation() ([PR #18](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/18))
+  * Prevent duplicate ids ([PR #48](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/48))
+  * colorpicker instead of collorpicker as DOM-ID ([PR #54](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/54))
+  * add destroy method to cleanup after colpick plugin ([PR #32](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/32))
+  * Call onHide callback when calling colpickHide ([PR #38](https://github.com/josedvq/colpick-jQuery-Color-Picker/pull/38))
 
 Dual licensed under the MIT and GPLv2 licenses.
 
